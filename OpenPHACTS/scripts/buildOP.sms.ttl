@@ -1,0 +1,621 @@
+# baseURI: http://www.workingontologist.org/OpenPHACTS/scripts/buildOP
+# imports: http://topbraid.org/sparqlmotionfunctions
+# imports: http://topbraid.org/sparqlmotionlib-tbc
+
+@prefix APIspec:  <http://www.workingontologist.org/OpenPHACTS/scripts/APIspec#> .
+@prefix OP:      <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS#> .
+@prefix buildOP:  <http://www.workingontologist.org/OpenPHACTS/scripts/buildOP#> .
+@prefix keymodel:  <http://www.workingontologist.org/OpenPHACTS/keys/keymodel#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sm:      <http://topbraid.org/sparqlmotion#> .
+@prefix smf:     <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml:     <http://topbraid.org/sparqlmotionlib#> .
+@prefix sp:      <http://spinrdf.org/sp#> .
+@prefix spin:    <http://spinrdf.org/spin#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.workingontologist.org/OpenPHACTS/scripts/buildOP>
+      rdf:type owl:Ontology ;
+      owl:imports <http://topbraid.org/sparqlmotionfunctions> , <http://topbraid.org/sparqlmotionlib-tbc> ;
+      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
+
+buildOP:ApplyConstruct_1
+      rdf:type sml:ApplyConstruct ;
+      rdfs:label "Apply construct 1"^^xsd:string ;
+      sm:next buildOP:FilterByConstruct_1 ;
+      sml:constructQuery
+              [ rdf:type sp:Construct ;
+                rdfs:comment "This query builds the function from elements of MyClass that describe the API.  The only flaw is that the SelectByQuery has too many copies of the query.  there's another query to remove the ones that aren't needed.  It leaves a bunch of junk lying around that nobody sees, but takes up space.  So be it."^^xsd:string ;
+                sp:templates ([ sp:object
+                                    [ sp:varName "argument"^^xsd:string
+                                    ] ;
+                            sp:predicate spin:constraint ;
+                            sp:subject
+                                    [ sp:varName "function"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "returnrdf"^^xsd:string
+                                    ] ;
+                            sp:predicate sm:returnModule ;
+                            sp:subject
+                                    [ sp:varName "function"^^xsd:string
+                                    ]
+                          ] [ sp:object sm:Function ;
+                            sp:predicate rdf:type ;
+                            sp:subject
+                                    [ sp:varName "function"^^xsd:string
+                                    ]
+                          ] [ sp:object sm:Functions ;
+                            sp:predicate rdfs:subClassOf ;
+                            sp:subject
+                                    [ sp:varName "function"^^xsd:string
+                                    ]
+                          ] [ sp:object rdf:Property ;
+                            sp:predicate rdf:type ;
+                            sp:subject
+                                    [ sp:varName "property"^^xsd:string
+                                    ]
+                          ] [ sp:object sp:arg ;
+                            sp:predicate rdfs:subPropertyOf ;
+                            sp:subject
+                                    [ sp:varName "property"^^xsd:string
+                                    ]
+                          ] [ sp:object _:b1 ;
+                            sp:predicate sp:object ;
+                            sp:subject _:b2
+                          ] [ sp:object keymodel:id ;
+                            sp:predicate sp:predicate ;
+                            sp:subject _:b2
+                          ] [ sp:object _:b3 ;
+                            sp:predicate sp:subject ;
+                            sp:subject _:b2
+                          ] [ sp:object
+                                    [ sp:varName "bindbyselect1"^^xsd:string
+                                    ] ;
+                            sp:predicate sm:next ;
+                            sp:subject
+                                    [ sp:varName "argument"^^xsd:string
+                                    ]
+                          ] [ sp:object <http://spinrdf.org/spl#Argument> ;
+                            sp:predicate rdf:type ;
+                            sp:subject
+                                    [ sp:varName "argument"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "property"^^xsd:string
+                                    ] ;
+                            sp:predicate <http://spinrdf.org/spl#predicate> ;
+                            sp:subject
+                                    [ sp:varName "argument"^^xsd:string
+                                    ]
+                          ] [ sp:object xsd:string ;
+                            sp:predicate <http://spinrdf.org/spl#valueType> ;
+                            sp:subject
+                                    [ sp:varName "argument"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "bindbyselect"^^xsd:string
+                                    ] ;
+                            sp:predicate sm:next ;
+                            sp:subject
+                                    [ sp:varName "importrdffromworkspace"^^xsd:string
+                                    ]
+                          ] [ sp:object "http://www.workingontologist.org/OpenPHACTS/keys/Dean.key" ;
+                            sp:predicate sml:baseURI ;
+                            sp:subject
+                                    [ sp:varName "importrdffromworkspace"^^xsd:string
+                                    ]
+                          ] [ sp:object sml:ImportRDFFromWorkspace ;
+                            sp:predicate rdf:type ;
+                            sp:subject
+                                    [ sp:varName "importrdffromworkspace"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "returnrdf"^^xsd:string
+                                    ] ;
+                            sp:predicate sm:next ;
+                            sp:subject
+                                    [ sp:varName "importrdffromurl"^^xsd:string
+                                    ]
+                          ] [ sp:object sml:ImportRDFFromURL ;
+                            sp:predicate rdf:type ;
+                            sp:subject
+                                    [ sp:varName "importrdffromurl"^^xsd:string
+                                    ]
+                          ] [ sp:object smf:buildString ;
+                            sp:predicate rdf:type ;
+                            sp:subject _:b4
+                          ] [ sp:object
+                                    [ sp:varName "callparm"^^xsd:string
+                                    ] ;
+                            sp:predicate sp:arg1 ;
+                            sp:subject _:b4
+                          ] [ sp:object "" ;
+                            sp:predicate sp:arg2 ;
+                            sp:subject _:b4
+                          ] [ sp:object _:b5 ;
+                            sp:predicate sp:arg1 ;
+                            sp:subject _:b6
+                          ] [ sp:object sp:bound ;
+                            sp:predicate rdf:type ;
+                            sp:subject _:b6
+                          ] [ sp:object sml:ReturnRDF ;
+                            sp:predicate rdf:type ;
+                            sp:subject
+                                    [ sp:varName "returnrdf"^^xsd:string
+                                    ]
+                          ] [ sp:object sp:Select ;
+                            sp:predicate rdf:type ;
+                            sp:subject _:b7
+                          ] [ sp:object _:b8 ;
+                            sp:predicate sp:resultVariables ;
+                            sp:subject _:b7
+                          ] [ sp:object _:b9 ;
+                            sp:predicate sp:where ;
+                            sp:subject _:b7
+                          ] [ sp:object _:b10 ;
+                            sp:predicate sp:expression ;
+                            sp:subject _:b11
+                          ] [ sp:object sp:Bind ;
+                            sp:predicate rdf:type ;
+                            sp:subject _:b11
+                          ] [ sp:object _:b12 ;
+                            sp:predicate sp:variable ;
+                            sp:subject _:b11
+                          ] [ sp:object
+                                    [ sp:varName "parmarg"^^xsd:string
+                                    ] ;
+                            sp:predicate sp:varName ;
+                            sp:subject _:b12
+                          ] [ sp:object _:b13 ;
+                            sp:predicate rdf:rest ;
+                            sp:subject _:b14
+                          ] [ sp:object _:b15 ;
+                            sp:predicate rdf:first ;
+                            sp:subject _:b14
+                          ] [ sp:object () ;
+                            sp:predicate rdf:rest ;
+                            sp:subject _:b13
+                          ] [ sp:object _:b16 ;
+                            sp:predicate rdf:first ;
+                            sp:subject _:b13
+                          ] [ sp:object sp:Select ;
+                            sp:predicate rdf:type ;
+                            sp:subject _:b17
+                          ] [ sp:object _:b14 ;
+                            sp:predicate sp:resultVariables ;
+                            sp:subject _:b17
+                          ] [ sp:object _:b18 ;
+                            sp:predicate sp:where ;
+                            sp:subject _:b17
+                          ] [ sp:object _:b19 ;
+                            sp:predicate sp:object ;
+                            sp:subject _:b20
+                          ] [ sp:object keymodel:key ;
+                            sp:predicate sp:predicate ;
+                            sp:subject _:b20
+                          ] [ sp:object _:b21 ;
+                            sp:predicate sp:subject ;
+                            sp:subject _:b20
+                          ] [ sp:object _:b6 ;
+                            sp:predicate sp:arg1 ;
+                            sp:subject _:b10
+                          ] [ sp:object _:b4 ;
+                            sp:predicate sp:arg2 ;
+                            sp:subject _:b10
+                          ] [ sp:object "" ;
+                            sp:predicate sp:arg3 ;
+                            sp:subject _:b10
+                          ] [ sp:object smf:if ;
+                            sp:predicate rdf:type ;
+                            sp:subject _:b10
+                          ] [ sp:object () ;
+                            sp:predicate rdf:rest ;
+                            sp:subject _:b8
+                          ] [ sp:object _:b22 ;
+                            sp:predicate rdf:first ;
+                            sp:subject _:b8
+                          ] [ sp:object
+                                    [ sp:varName "importrdffromurl"^^xsd:string
+                                    ] ;
+                            sp:predicate sm:next ;
+                            sp:subject
+                                    [ sp:varName "bindbyselect"^^xsd:string
+                                    ]
+                          ] [ sp:object sml:BindBySelect ;
+                            sp:predicate rdf:type ;
+                            sp:subject
+                                    [ sp:varName "bindbyselect"^^xsd:string
+                                    ]
+                          ] [ sp:object _:b17 ;
+                            sp:predicate sml:selectQuery ;
+                            sp:subject
+                                    [ sp:varName "bindbyselect"^^xsd:string
+                                    ]
+                          ] [ sp:object () ;
+                            sp:predicate rdf:rest ;
+                            sp:subject _:b23
+                          ] [ sp:object _:b20 ;
+                            sp:predicate rdf:first ;
+                            sp:subject _:b23
+                          ] [ sp:object
+                                    [ sp:varName "importrdffromurl"^^xsd:string
+                                    ] ;
+                            sp:predicate sm:next ;
+                            sp:subject
+                                    [ sp:varName "bindbyselect1"^^xsd:string
+                                    ]
+                          ] [ sp:object sml:BindBySelect ;
+                            sp:predicate rdf:type ;
+                            sp:subject
+                                    [ sp:varName "bindbyselect1"^^xsd:string
+                                    ]
+                          ] [ sp:object _:b7 ;
+                            sp:predicate sml:selectQuery ;
+                            sp:subject
+                                    [ sp:varName "bindbyselect1"^^xsd:string
+                                    ]
+                          ] [ sp:object () ;
+                            sp:predicate rdf:rest ;
+                            sp:subject _:b9
+                          ] [ sp:object _:b11 ;
+                            sp:predicate rdf:first ;
+                            sp:subject _:b9
+                          ] [ sp:object _:b23 ;
+                            sp:predicate rdf:rest ;
+                            sp:subject _:b18
+                          ] [ sp:object _:b2 ;
+                            sp:predicate rdf:first ;
+                            sp:subject _:b18
+                          ] [ sp:object "?0"^^xsd:string ;
+                            sp:predicate sp:varName ;
+                            sp:subject _:b3
+                          ] [ sp:object
+                                    [ sp:varName "parmarg"^^xsd:string
+                                    ] ;
+                            sp:predicate sp:varName ;
+                            sp:subject _:b22
+                          ] [ sp:object "?0"^^xsd:string ;
+                            sp:predicate sp:varName ;
+                            sp:subject _:b21
+                          ] [ sp:object "id"^^xsd:string ;
+                            sp:predicate sp:varName ;
+                            sp:subject _:b15
+                          ] [ sp:object "id"^^xsd:string ;
+                            sp:predicate sp:varName ;
+                            sp:subject _:b1
+                          ] [ sp:object
+                                    [ sp:varName "parm"^^xsd:string
+                                    ] ;
+                            sp:predicate sp:varName ;
+                            sp:subject _:b5
+                          ] [ sp:object "key"^^xsd:string ;
+                            sp:predicate sp:varName ;
+                            sp:subject _:b19
+                          ] [ sp:object "key"^^xsd:string ;
+                            sp:predicate sp:varName ;
+                            sp:subject _:b16
+                          ]) ;
+                sp:where ([ sp:object OP:MyClass ;
+                            sp:predicate rdf:type ;
+                            sp:subject
+                                    [ sp:varName "s"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "call"^^xsd:string
+                                    ] ;
+                            sp:predicate OP:call ;
+                            sp:subject
+                                    [ sp:varName "s"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "parm"^^xsd:string
+                                    ] ;
+                            sp:predicate OP:parm ;
+                            sp:subject
+                                    [ sp:varName "s"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:regex ;
+                                      sp:arg1 [ rdf:type smf:regex ;
+                                                sp:arg1 [ sp:varName "call"^^xsd:string
+                                                        ] ;
+                                                sp:arg2 "^https://beta.openphacts.org/(.*)\\?" ;
+                                                sp:arg3 "$1"
+                                              ] ;
+                                      sp:arg2 "/" ;
+                                      sp:arg3 "-"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "fname"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
+                                      sp:arg1 ":{?1}" ;
+                                      sp:arg2 [ sp:varName "fname"^^xsd:string
+                                              ]
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "function"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
+                                      sp:arg1 ":{?fname}-{?parm}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "argument"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
+                                      sp:arg1 ":BIND{?fname}-{?parm}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "bindliteralvalue"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildString ;
+                                      sp:arg1 "{?parm}arg"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "parmarg"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildString ;
+                                      sp:arg1 "{?parm}={?{?parm}}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "callparm"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
+                                      sp:arg1 "arg:{?parm}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "property"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
+                                      sp:arg1 ":Return-{?fname}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "returnrdf"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
+                                      sp:arg1 ":Import-{?fname}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "importrdffromurl"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
+                                      sp:arg1 ":Bind-{?fname}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "bindbyselect"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
+                                      sp:arg1 ":Bind-{?fname}-{?parm}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "bindbyselect1"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
+                                      sp:arg1 ":WS-{?fname}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "importrdffromworkspace"^^xsd:string
+                                    ]
+                          ])
+              ] ;
+      sml:constructQuery
+              [ rdf:type sp:Construct ;
+                sp:templates ([ sp:object owl:Ontology ;
+                            sp:predicate rdf:type ;
+                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
+                          ] [ sp:object <http://topbraid.org/sparqlmotionfunctions> ;
+                            sp:predicate owl:imports ;
+                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
+                          ] [ sp:object <http://topbraid.org/sparqlmotionlib-tbc> ;
+                            sp:predicate owl:imports ;
+                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
+                          ] [ sp:object <http://www.w3.org/2004/02/skos/core> ;
+                            sp:predicate owl:imports ;
+                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
+                          ] [ sp:object <http://www.workingontologist.org/OpenPHACTS/keys/keymodel> ;
+                            sp:predicate owl:imports ;
+                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
+                          ] [ sp:object "Created with TopBraid Composer"^^xsd:string ;
+                            sp:predicate owl:versionInfo ;
+                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
+                          ]) ;
+                sp:where ()
+              ] ;
+      sml:replace "true"^^xsd:boolean .
+
+buildOP:ApplyConstruct_2
+      rdf:type sml:ApplyConstruct ;
+      rdfs:label "Apply construct 2"^^xsd:string ;
+      sm:next buildOP:ExportToRDFFile_1 ;
+      sml:constructQuery
+              [ rdf:type sp:Construct ;
+                sp:templates ([ sp:object
+                                    [ sp:varName "args"^^xsd:string
+                                    ] ;
+                            sp:predicate sml:url ;
+                            sp:subject
+                                    [ sp:varName "importrdffromurl"^^xsd:string
+                                    ]
+                          ]) ;
+                sp:where ([ rdf:type sp:SubQuery ;
+                            sp:query
+                                    [ rdf:type sp:Select ;
+                                      sp:groupBy ([ sp:varName "importrdffromurl"^^xsd:string
+                                                ]) ;
+                                      sp:resultVariables ([ sp:varName "importrdffromurl"^^xsd:string
+                                                ] [ sp:expression
+                                                          [ rdf:type sp:concat ;
+                                                            sp:arg1 "https://beta.openphacts.org/search/freetext?app_id={?id}&app_key={?key}&" ;
+                                                            sp:arg2 [ rdf:type sp:GroupConcat ;
+                                                                      sp:expression
+                                                                              [ sp:varName "thearg"^^xsd:string
+                                                                              ] ;
+                                                                      sp:separator "&"^^xsd:string
+                                                                    ]
+                                                          ] ;
+                                                  sp:varName "args"^^xsd:string
+                                                ]) ;
+                                      sp:where ([ sp:object sml:ImportRDFFromURL ;
+                                                  sp:predicate rdf:type ;
+                                                  sp:subject
+                                                          [ sp:varName "importrdffromurl"^^xsd:string
+                                                          ]
+                                                ] [ sp:object
+                                                          [ sp:varName "importrdffromurl"^^xsd:string
+                                                          ] ;
+                                                  sp:predicate sm:next ;
+                                                  sp:subject
+                                                          [ sp:varName "bindbyselect"^^xsd:string
+                                                          ]
+                                                ] [ sp:object sml:BindBySelect ;
+                                                  sp:predicate rdf:type ;
+                                                  sp:subject
+                                                          [ sp:varName "bindbyselect"^^xsd:string
+                                                          ]
+                                                ] [ sp:object
+                                                          [ sp:varName "select"^^xsd:string
+                                                          ] ;
+                                                  sp:predicate sml:selectQuery ;
+                                                  sp:subject
+                                                          [ sp:varName "bindbyselect"^^xsd:string
+                                                          ]
+                                                ] [ sp:object
+                                                          [ sp:varName "var"^^xsd:string
+                                                          ] ;
+                                                  sp:predicate sp:resultVariables ;
+                                                  sp:subject
+                                                          [ sp:varName "select"^^xsd:string
+                                                          ]
+                                                ] [ sp:object () ;
+                                                  sp:predicate rdf:rest ;
+                                                  sp:subject
+                                                          [ sp:varName "var"^^xsd:string
+                                                          ]
+                                                ] [ sp:object
+                                                          [ sp:varName "var1"^^xsd:string
+                                                          ] ;
+                                                  sp:predicate rdf:first ;
+                                                  sp:subject
+                                                          [ sp:varName "var"^^xsd:string
+                                                          ]
+                                                ] [ sp:object
+                                                          [ sp:varName "arg"^^xsd:string
+                                                          ] ;
+                                                  sp:predicate sp:varName ;
+                                                  sp:subject
+                                                          [ sp:varName "var1"^^xsd:string
+                                                          ]
+                                                ] [ rdf:type sp:Bind ;
+                                                  sp:expression
+                                                          [ rdf:type smf:buildString ;
+                                                            sp:arg1 "{?{?arg}}"
+                                                          ] ;
+                                                  sp:variable
+                                                          [ sp:varName "thearg"^^xsd:string
+                                                          ]
+                                                ])
+                                    ]
+                          ])
+              ] .
+
+buildOP:BuildOP
+      rdf:type sm:Function ;
+      rdfs:subClassOf sm:Functions ;
+      sm:returnModule buildOP:BuildOP_Return .
+
+buildOP:BuildOP_Return
+      rdf:type sml:ReturnText .
+
+buildOP:ExportToRDFFile_1
+      rdf:type sml:ExportToRDFFile ;
+      rdfs:label "Export to RDFFile 1"^^xsd:string ;
+      sm:next buildOP:BuildOP_Return ;
+      sml:baseURI "http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS"^^xsd:string ;
+      sml:targetFilePath "OpenPHACTS.ttl"^^xsd:string .
+
+buildOP:FilterByConstruct_1
+      rdf:type sml:FilterByConstruct ;
+      rdfs:label "Filter by construct 1"^^xsd:string ;
+      sm:next buildOP:ApplyConstruct_2 ;
+      sml:constructQuery
+              [ rdf:type sp:Construct ;
+                sp:templates ([ sp:object
+                                    [ sp:varName "q1"^^xsd:string
+                                    ] ;
+                            sp:predicate sml:selectQuery ;
+                            sp:subject
+                                    [ sp:varName "s"^^xsd:string
+                                    ]
+                          ]) ;
+                sp:where ([ sp:object
+                                    [ sp:varName "q1"^^xsd:string
+                                    ] ;
+                            sp:predicate sml:selectQuery ;
+                            sp:subject
+                                    [ sp:varName "s"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "q2"^^xsd:string
+                                    ] ;
+                            sp:predicate sml:selectQuery ;
+                            sp:subject
+                                    [ sp:varName "s"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildString ;
+                                      sp:arg1 "{?q1}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "n1"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildString ;
+                                      sp:arg1 "{?q2}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "n2"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Filter ;
+                            sp:expression
+                                    [ rdf:type sp:gt ;
+                                      sp:arg1 [ sp:varName "n1"^^xsd:string
+                                              ] ;
+                                      sp:arg2 [ sp:varName "n2"^^xsd:string
+                                              ]
+                                    ]
+                          ])
+              ] .
+
+<http://www.workingontologist.org/OpenPHACTS/scripts/buildOP#Import-APIspec.ttl_1>
+      rdf:type sml:ImportRDFFromWorkspace ;
+      rdfs:label "Import APIspec.ttl"^^xsd:string ;
+      sm:next buildOP:ApplyConstruct_1 ;
+      sml:baseURI "http://www.workingontologist.org/OpenPHACTS/scripts/APIspec"^^xsd:string .

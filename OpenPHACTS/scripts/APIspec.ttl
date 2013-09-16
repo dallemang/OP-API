@@ -1,0 +1,608 @@
+# baseURI: http://www.workingontologist.org/OpenPHACTS/scripts/APIspec
+# imports: http://spinrdf.org/spin
+# imports: http://www.workingontologist.org/OpenPHACTS/keys/keymodel
+
+@prefix :        <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS#> .
+@prefix APIspec:  <http://www.workingontologist.org/OpenPHACTS/scripts/APIspec#> .
+@prefix OP:      <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix smf:     <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sp:      <http://spinrdf.org/sp#> .
+@prefix spin:    <http://spinrdf.org/spin#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.workingontologist.org/OpenPHACTS/scripts/APIspec>
+      rdf:type owl:Ontology ;
+      spin:rule
+              [ rdf:type sp:Modify ;
+                rdfs:comment "This query builds the function from elements of MyClass that describe the API.  The only flaw is that the SelectByQuery has too many copies of the query.  there's another query to remove the ones that aren't needed.  It leaves a bunch of junk lying around that nobody sees, but takes up space.  So be it."^^xsd:string ;
+                sp:insertPattern ([ rdf:type sp:NamedGraph ;
+                            sp:elements ([ sp:object
+                                                [ sp:varName "argument"^^xsd:string
+                                                ] ;
+                                        sp:predicate spin:constraint ;
+                                        sp:subject
+                                                [ sp:varName "function"^^xsd:string
+                                                ]
+                                      ] [ sp:object
+                                                [ sp:varName "returnrdf"^^xsd:string
+                                                ] ;
+                                        sp:predicate <http://topbraid.org/sparqlmotion#returnModule> ;
+                                        sp:subject
+                                                [ sp:varName "function"^^xsd:string
+                                                ]
+                                      ] [ sp:object <http://topbraid.org/sparqlmotion#Function> ;
+                                        sp:predicate rdf:type ;
+                                        sp:subject
+                                                [ sp:varName "function"^^xsd:string
+                                                ]
+                                      ] [ sp:object <http://topbraid.org/sparqlmotion#Functions> ;
+                                        sp:predicate rdfs:subClassOf ;
+                                        sp:subject
+                                                [ sp:varName "function"^^xsd:string
+                                                ]
+                                      ] [ sp:object rdf:Property ;
+                                        sp:predicate rdf:type ;
+                                        sp:subject
+                                                [ sp:varName "property"^^xsd:string
+                                                ]
+                                      ] [ sp:object sp:arg ;
+                                        sp:predicate rdfs:subPropertyOf ;
+                                        sp:subject
+                                                [ sp:varName "property"^^xsd:string
+                                                ]
+                                      ] [ sp:object _:b1 ;
+                                        sp:predicate sp:object ;
+                                        sp:subject _:b2
+                                      ] [ sp:object <http://www.workingontologist.org/OpenPHACTS/keys/keymodel#id> ;
+                                        sp:predicate sp:predicate ;
+                                        sp:subject _:b2
+                                      ] [ sp:object _:b3 ;
+                                        sp:predicate sp:subject ;
+                                        sp:subject _:b2
+                                      ] [ sp:object
+                                                [ sp:varName "bindbyselect1"^^xsd:string
+                                                ] ;
+                                        sp:predicate <http://topbraid.org/sparqlmotion#next> ;
+                                        sp:subject
+                                                [ sp:varName "argument"^^xsd:string
+                                                ]
+                                      ] [ sp:object <http://spinrdf.org/spl#Argument> ;
+                                        sp:predicate rdf:type ;
+                                        sp:subject
+                                                [ sp:varName "argument"^^xsd:string
+                                                ]
+                                      ] [ sp:object
+                                                [ sp:varName "property"^^xsd:string
+                                                ] ;
+                                        sp:predicate <http://spinrdf.org/spl#predicate> ;
+                                        sp:subject
+                                                [ sp:varName "argument"^^xsd:string
+                                                ]
+                                      ] [ sp:object xsd:string ;
+                                        sp:predicate <http://spinrdf.org/spl#valueType> ;
+                                        sp:subject
+                                                [ sp:varName "argument"^^xsd:string
+                                                ]
+                                      ] [ sp:object
+                                                [ sp:varName "bindbyselect"^^xsd:string
+                                                ] ;
+                                        sp:predicate <http://topbraid.org/sparqlmotion#next> ;
+                                        sp:subject
+                                                [ sp:varName "importrdffromworkspace"^^xsd:string
+                                                ]
+                                      ] [ sp:object "http://www.workingontologist.org/OpenPHACTS/keys/Dean" ;
+                                        sp:predicate <http://topbraid.org/sparqlmotionlib#baseURI> ;
+                                        sp:subject
+                                                [ sp:varName "importrdffromworkspace"^^xsd:string
+                                                ]
+                                      ] [ sp:object <http://topbraid.org/sparqlmotionlib#ImportRDFFromWorkspace> ;
+                                        sp:predicate rdf:type ;
+                                        sp:subject
+                                                [ sp:varName "importrdffromworkspace"^^xsd:string
+                                                ]
+                                      ] [ sp:object
+                                                [ sp:varName "returnrdf"^^xsd:string
+                                                ] ;
+                                        sp:predicate <http://topbraid.org/sparqlmotion#next> ;
+                                        sp:subject
+                                                [ sp:varName "importrdffromurl"^^xsd:string
+                                                ]
+                                      ] [ sp:object <http://topbraid.org/sparqlmotionlib#ImportRDFFromURL> ;
+                                        sp:predicate rdf:type ;
+                                        sp:subject
+                                                [ sp:varName "importrdffromurl"^^xsd:string
+                                                ]
+                                      ] [ sp:object smf:buildString ;
+                                        sp:predicate rdf:type ;
+                                        sp:subject _:b4
+                                      ] [ sp:object
+                                                [ sp:varName "callparm"^^xsd:string
+                                                ] ;
+                                        sp:predicate sp:arg1 ;
+                                        sp:subject _:b4
+                                      ] [ sp:object "" ;
+                                        sp:predicate sp:arg2 ;
+                                        sp:subject _:b4
+                                      ] [ sp:object _:b5 ;
+                                        sp:predicate sp:arg1 ;
+                                        sp:subject _:b6
+                                      ] [ sp:object sp:bound ;
+                                        sp:predicate rdf:type ;
+                                        sp:subject _:b6
+                                      ] [ sp:object <http://topbraid.org/sparqlmotionlib#ReturnRDF> ;
+                                        sp:predicate rdf:type ;
+                                        sp:subject
+                                                [ sp:varName "returnrdf"^^xsd:string
+                                                ]
+                                      ] [ sp:object sp:Select ;
+                                        sp:predicate rdf:type ;
+                                        sp:subject _:b7
+                                      ] [ sp:object _:b8 ;
+                                        sp:predicate sp:resultVariables ;
+                                        sp:subject _:b7
+                                      ] [ sp:object _:b9 ;
+                                        sp:predicate sp:where ;
+                                        sp:subject _:b7
+                                      ] [ sp:object _:b10 ;
+                                        sp:predicate sp:expression ;
+                                        sp:subject _:b11
+                                      ] [ sp:object sp:Bind ;
+                                        sp:predicate rdf:type ;
+                                        sp:subject _:b11
+                                      ] [ sp:object _:b12 ;
+                                        sp:predicate sp:variable ;
+                                        sp:subject _:b11
+                                      ] [ sp:object
+                                                [ sp:varName "parmarg"^^xsd:string
+                                                ] ;
+                                        sp:predicate sp:varName ;
+                                        sp:subject _:b12
+                                      ] [ sp:object _:b13 ;
+                                        sp:predicate rdf:rest ;
+                                        sp:subject _:b14
+                                      ] [ sp:object _:b15 ;
+                                        sp:predicate rdf:first ;
+                                        sp:subject _:b14
+                                      ] [ sp:object () ;
+                                        sp:predicate rdf:rest ;
+                                        sp:subject _:b13
+                                      ] [ sp:object _:b16 ;
+                                        sp:predicate rdf:first ;
+                                        sp:subject _:b13
+                                      ] [ sp:object sp:Select ;
+                                        sp:predicate rdf:type ;
+                                        sp:subject _:b17
+                                      ] [ sp:object _:b14 ;
+                                        sp:predicate sp:resultVariables ;
+                                        sp:subject _:b17
+                                      ] [ sp:object _:b18 ;
+                                        sp:predicate sp:where ;
+                                        sp:subject _:b17
+                                      ] [ sp:object _:b19 ;
+                                        sp:predicate sp:object ;
+                                        sp:subject _:b20
+                                      ] [ sp:object <http://www.workingontologist.org/OpenPHACTS/keys/keymodel#key> ;
+                                        sp:predicate sp:predicate ;
+                                        sp:subject _:b20
+                                      ] [ sp:object _:b21 ;
+                                        sp:predicate sp:subject ;
+                                        sp:subject _:b20
+                                      ] [ sp:object _:b6 ;
+                                        sp:predicate sp:arg1 ;
+                                        sp:subject _:b10
+                                      ] [ sp:object _:b4 ;
+                                        sp:predicate sp:arg2 ;
+                                        sp:subject _:b10
+                                      ] [ sp:object smf:if ;
+                                        sp:predicate rdf:type ;
+                                        sp:subject _:b10
+                                      ] [ sp:object () ;
+                                        sp:predicate rdf:rest ;
+                                        sp:subject _:b8
+                                      ] [ sp:object _:b22 ;
+                                        sp:predicate rdf:first ;
+                                        sp:subject _:b8
+                                      ] [ sp:object
+                                                [ sp:varName "importrdffromurl"^^xsd:string
+                                                ] ;
+                                        sp:predicate <http://topbraid.org/sparqlmotion#next> ;
+                                        sp:subject
+                                                [ sp:varName "bindbyselect"^^xsd:string
+                                                ]
+                                      ] [ sp:object <http://topbraid.org/sparqlmotionlib#BindBySelect> ;
+                                        sp:predicate rdf:type ;
+                                        sp:subject
+                                                [ sp:varName "bindbyselect"^^xsd:string
+                                                ]
+                                      ] [ sp:object _:b17 ;
+                                        sp:predicate <http://topbraid.org/sparqlmotionlib#selectQuery> ;
+                                        sp:subject
+                                                [ sp:varName "bindbyselect"^^xsd:string
+                                                ]
+                                      ] [ sp:object () ;
+                                        sp:predicate rdf:rest ;
+                                        sp:subject _:b23
+                                      ] [ sp:object _:b20 ;
+                                        sp:predicate rdf:first ;
+                                        sp:subject _:b23
+                                      ] [ sp:object
+                                                [ sp:varName "importrdffromurl"^^xsd:string
+                                                ] ;
+                                        sp:predicate <http://topbraid.org/sparqlmotion#next> ;
+                                        sp:subject
+                                                [ sp:varName "bindbyselect1"^^xsd:string
+                                                ]
+                                      ] [ sp:object <http://topbraid.org/sparqlmotionlib#BindBySelect> ;
+                                        sp:predicate rdf:type ;
+                                        sp:subject
+                                                [ sp:varName "bindbyselect1"^^xsd:string
+                                                ]
+                                      ] [ sp:object _:b7 ;
+                                        sp:predicate <http://topbraid.org/sparqlmotionlib#selectQuery> ;
+                                        sp:subject
+                                                [ sp:varName "bindbyselect1"^^xsd:string
+                                                ]
+                                      ] [ sp:object () ;
+                                        sp:predicate rdf:rest ;
+                                        sp:subject _:b9
+                                      ] [ sp:object _:b11 ;
+                                        sp:predicate rdf:first ;
+                                        sp:subject _:b9
+                                      ] [ sp:object _:b23 ;
+                                        sp:predicate rdf:rest ;
+                                        sp:subject _:b18
+                                      ] [ sp:object _:b2 ;
+                                        sp:predicate rdf:first ;
+                                        sp:subject _:b18
+                                      ] [ sp:object "?0"^^xsd:string ;
+                                        sp:predicate sp:varName ;
+                                        sp:subject _:b3
+                                      ] [ sp:object
+                                                [ sp:varName "parmarg"^^xsd:string
+                                                ] ;
+                                        sp:predicate sp:varName ;
+                                        sp:subject _:b22
+                                      ] [ sp:object "?0"^^xsd:string ;
+                                        sp:predicate sp:varName ;
+                                        sp:subject _:b21
+                                      ] [ sp:object "id"^^xsd:string ;
+                                        sp:predicate sp:varName ;
+                                        sp:subject _:b15
+                                      ] [ sp:object "id"^^xsd:string ;
+                                        sp:predicate sp:varName ;
+                                        sp:subject _:b1
+                                      ] [ sp:object
+                                                [ sp:varName "parm"^^xsd:string
+                                                ] ;
+                                        sp:predicate sp:varName ;
+                                        sp:subject _:b5
+                                      ] [ sp:object "key"^^xsd:string ;
+                                        sp:predicate sp:varName ;
+                                        sp:subject _:b19
+                                      ] [ sp:object "key"^^xsd:string ;
+                                        sp:predicate sp:varName ;
+                                        sp:subject _:b16
+                                      ]) ;
+                            sp:graphNameNode <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
+                          ]) ;
+                sp:where ([ sp:object OP:MyClass ;
+                            sp:predicate rdf:type ;
+                            sp:subject
+                                    [ sp:varName "s"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "call"^^xsd:string
+                                    ] ;
+                            sp:predicate OP:call ;
+                            sp:subject
+                                    [ sp:varName "s"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "parm"^^xsd:string
+                                    ] ;
+                            sp:predicate OP:parm ;
+                            sp:subject
+                                    [ sp:varName "s"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:regex ;
+                                      sp:arg1 [ rdf:type smf:regex ;
+                                                sp:arg1 [ sp:varName "call"^^xsd:string
+                                                        ] ;
+                                                sp:arg2 "^https://beta.openphacts.org/(.*)\\?" ;
+                                                sp:arg3 "$1"
+                                              ] ;
+                                      sp:arg2 "/" ;
+                                      sp:arg3 "-"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "fname"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
+                                      sp:arg1 ":{?1}" ;
+                                      sp:arg2 [ sp:varName "fname"^^xsd:string
+                                              ]
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "function"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
+                                      sp:arg1 ":{?fname}-{?parm}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "argument"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
+                                      sp:arg1 ":BIND{?fname}-{?parm}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "bindliteralvalue"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildString ;
+                                      sp:arg1 "{?parm}arg"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "parmarg"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildString ;
+                                      sp:arg1 "{?parm}={?{?parm}}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "callparm"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
+                                      sp:arg1 "arg:{?parm}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "property"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
+                                      sp:arg1 ":Return-{?fname}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "returnrdf"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
+                                      sp:arg1 ":Import-{?fname}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "importrdffromurl"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
+                                      sp:arg1 ":Bind-{?fname}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "bindbyselect"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
+                                      sp:arg1 ":Bind-{?fname}-{?parm}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "bindbyselect1"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
+                                      sp:arg1 ":WS-{?fname}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "importrdffromworkspace"^^xsd:string
+                                    ]
+                          ])
+              ] ;
+      spin:rule
+              [ rdf:type sp:Modify ;
+                sp:deletePattern ([ sp:object
+                                    [ sp:varName "q1"^^xsd:string
+                                    ] ;
+                            sp:predicate <http://topbraid.org/sparqlmotionlib#selectQuery> ;
+                            sp:subject
+                                    [ sp:varName "s"^^xsd:string
+                                    ]
+                          ]) ;
+                sp:where ([ sp:object
+                                    [ sp:varName "q1"^^xsd:string
+                                    ] ;
+                            sp:predicate <http://topbraid.org/sparqlmotionlib#selectQuery> ;
+                            sp:subject
+                                    [ sp:varName "s"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "q2"^^xsd:string
+                                    ] ;
+                            sp:predicate <http://topbraid.org/sparqlmotionlib#selectQuery> ;
+                            sp:subject
+                                    [ sp:varName "s"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildString ;
+                                      sp:arg1 "{?q1}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "n1"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildString ;
+                                      sp:arg1 "{?q2}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "n2"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Filter ;
+                            sp:expression
+                                    [ rdf:type sp:gt ;
+                                      sp:arg1 [ sp:varName "n1"^^xsd:string
+                                              ] ;
+                                      sp:arg2 [ sp:varName "n2"^^xsd:string
+                                              ]
+                                    ]
+                          ])
+              ] ;
+      owl:imports <http://spinrdf.org/spin> , <http://www.workingontologist.org/OpenPHACTS/keys/keymodel> ;
+      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
+
+OP:MyClass
+      rdf:type owl:Class ;
+      rdfs:subClassOf owl:Thing .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/structure/exact?" ;
+      OP:parm "_callback" , "searchOptions.Molecule" , "resultOptions.Limit" , "app_keys" , "app_ids" , "commonOptions.Isotopic" , "commonOptions.HasSpectra" , "commonOptions.Complexity" , "resultOptions.Start" , "resultOptions.Length" , "searchOptions.MatchType" , "commonOptions.HasPatents" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/structure?" ;
+      OP:parm "_callback" , "app_ids" , "inchi_key" , "app_keys" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/structure?" ;
+      OP:parm "app_ids" , "app_keys" , "_callback" , "inchi" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/structure/similarity?" ;
+      OP:parm "_callback" , "commonOptions.HasPatents" , "app_keys" , "searchOptions.Threshold" , "resultOptions.Length" , "searchOptions.SimilarityType" , "app_ids" , "commonOptions.HasSpectra" , "commonOptions.Isotopic" , "searchOptions.Molecule" , "commonOptions.Complexity" , "resultOptions.Limit" , "resultOptions.Start" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/structure?" ;
+      OP:parm "app_keys" , "app_ids" , "smiles" , "_callback" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/structure/substructure?" ;
+      OP:parm "_callback" , "app_keys" , "commonOptions.HasPatents" , "resultOptions.Length" , "app_ids" , "commonOptions.HasSpectra" , "commonOptions.Isotopic" , "searchOptions.Molecule" , "searchOptions.MatchTautomers" , "commonOptions.Complexity" , "resultOptions.Start" , "resultOptions.Limit" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/getConceptDescription?" ;
+      OP:parm "app_keys" , "app_ids" , "_callback" , "branch" , "uuid" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/search/byTag?" ;
+      OP:parm "_callback" , "q" , "limit" , "app_ids" , "app_keys" , "uuid" , "branch" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/search/freetext?" ;
+      OP:parm "branch" , "app_keys" , "app_ids" , "q" , "_callback" , "limit" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/mapURL?" ;
+      OP:parm "targetURISpace" , "app_keys" , "URL" , "app_ids" , "_callback" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/compound/chebi/members?" ;
+      OP:parm "uri" , "app_ids" , "app_keys" , "_callback" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/compound/chebi/root?" ;
+      OP:parm "app_ids" , "app_keys" , "_callback" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/compound/chebi/node?" ;
+      OP:parm "uri" , "app_ids" , "app_keys" , "_callback" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/compound/chebi/pharmacology/count?" ;
+      OP:parm "assay_organism" , "activity_value" , "_callback" , "target_organism" , "activity_type" , "maxEx-activity_value" , "app_ids" , "min-activity_value" , "activity_unit" , "uri" , "max-activity_value" , "app_keys" , "minEx-activity_value" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/compound/chebi/pharmacology?" ;
+      OP:parm "activity_type" , "assay_organism" , "activity_value" , "app_ids" , "min-activity_value" , "_callback" , "uri" , "max-activity_value" , "minEx-activity_value" , "maxEx-activity_value" , "activity_unit" , "app_keys" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/compound/chebi/pharmacology/pages?" ;
+      OP:parm "activity_value" , "_pageSize" , "target_organism" , "_callback" , "_page" , "activity_type" , "app_ids" , "maxEx-activity_value" , "min-activity_value" , "activity_unit" , "app_keys" , "uri" , "max-activity_value" , "assay_organism" , "minEx-activity_value" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/compound?" ;
+      OP:parm "_callback" , "app_keys" , "uri" , "app_ids" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/compound/pharmacology/count?" ;
+      OP:parm "activity_type" , "min-activity_value" , "app_ids" , "_callback" , "uri" , "maxEx-activity_value" , "max-activity_value" , "app_keys" , "activity_unit" , "minEx-activity_value" , "target_organism" , "assay_organism" , "activity_value" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/compound/pharmacology?" ;
+      OP:parm "uri" , "assay_organism" , "max-activity_value" , "activity_value" , "_callback" , "maxEx-activity_value" , "minEx-activity_value" , "min-activity_value" , "activity_type" , "app_keys" , "app_ids" , "activity_unit" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/compound/pharmacology/pages?" ;
+      OP:parm "app_ids" , "_callback" , "maxEx-activity_value" , "uri" , "max-activity_value" , "app_keys" , "_pageSize" , "activity_unit" , "target_organism" , "minEx-activity_value" , "assay_organism" , "min-activity_value" , "activity_value" , "activity_type" , "_page" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/sources?" ;
+      OP:parm "app_ids" , "app_keys" , "_callback" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/target/enzyme/root?" ;
+      OP:parm "app_keys" , "app_ids" , "_callback" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/target/enzyme/node?" ;
+      OP:parm "app_keys" , "uri" , "app_ids" , "_callback" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/target/enzyme/members?" ;
+      OP:parm "app_keys" , "app_ids" , "uri" , "_callback" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/target/enzyme/pharmacology/count?" ;
+      OP:parm "activity_value" , "activity_type" , "minEx-activity_value" , "maxEx-activity_value" , "min-activity_value" , "app_ids" , "_callback" , "uri" , "max-activity_value" , "target_organism" , "app_keys" , "activity_unit" , "assay_organism" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/target/enzyme/pharmacology?" ;
+      OP:parm "uri" , "_callback" , "activity_type" , "min-activity_value" , "app_keys" , "max-activity_value" , "activity_unit" , "activity_value" , "minEx-activity_value" , "maxEx-activity_value" , "app_ids" , "assay_organism" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/target/enzyme/pharmacology/pages?" ;
+      OP:parm "max-activity_value" , "_callback" , "minEx-activity_value" , "app_ids" , "app_keys" , "_page" , "target_organism" , "activity_value" , "activity_unit" , "uri" , "maxEx-activity_value" , "activity_type" , "min-activity_value" , "assay_organism" , "_pageSize" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/pathway?" ;
+      OP:parm "app_ids" , "uri" , "app_keys" , "_callback" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/pharmacology/filters/activities?" ;
+      OP:parm "app_keys" , "app_ids" , "_callback" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/pharmacology/filters/units/{act_type}?" ;
+      OP:parm "app_keys" , "app_ids" , "_callback" , "act_type" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/target?" ;
+      OP:parm "app_keys" , "uri" , "app_ids" , "_callback" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/target/pharmacology/count?" ;
+      OP:parm "app_ids" , "activity_value" , "activity_type" , "assay_organism" , "activity_unit" , "max-activity_value" , "_callback" , "uri" , "app_keys" , "maxEx-activity_value" , "minEx-activity_value" , "min-activity_value" , "target_organism" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/target/pharmacology?" ;
+      OP:parm "minEx-activity_value" , "assay_organism" , "activity_unit" , "min-activity_value" , "_callback" , "app_ids" , "app_keys" , "maxEx-activity_value" , "activity_type" , "max-activity_value" , "uri" , "activity_value" .
+
+[]    rdf:type OP:MyClass ;
+      OP:call "https://beta.openphacts.org/target/pharmacology/pages?" ;
+      OP:parm "_callback" , "_pageSize" , "assay_organism" , "max-activity_value" , "activity_unit" , "minEx-activity_value" , "app_ids" , "app_keys" , "activity_value" , "target_organism" , "uri" , "_page" , "activity_type" , "maxEx-activity_value" , "min-activity_value" .

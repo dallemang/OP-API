@@ -1,0 +1,27 @@
+# baseURI: http://www.workingontologist.org/OpenPHACTS/keys/keymodel
+
+@prefix keymodel:  <http://www.workingontologist.org/OpenPHACTS/keys/keymodel#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.workingontologist.org/OpenPHACTS/keys/keymodel>
+      rdf:type owl:Ontology ;
+      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
+
+keymodel:Key
+      rdf:type owl:Class ;
+      rdfs:subClassOf owl:Thing .
+
+keymodel:id
+      rdf:type rdf:Property ;
+      rdfs:domain keymodel:Key ;
+      rdfs:label "id"^^xsd:string ;
+      rdfs:range xsd:string .
+
+keymodel:key
+      rdf:type rdf:Property ;
+      rdfs:domain keymodel:Key ;
+      rdfs:label "key"^^xsd:string ;
+      rdfs:range xsd:string .

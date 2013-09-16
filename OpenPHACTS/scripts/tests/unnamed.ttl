@@ -1,0 +1,51 @@
+# baseURI: http://www.workingontologist.org/OpenPHACTS/scripts/tests/unnamed
+# imports: http://topbraid.org/sparqlmotionfunctions
+# imports: http://topbraid.org/sparqlmotionlib-tbc
+# imports: http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS
+
+@prefix OP:      <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS#> .
+@prefix arg:     <http://spinrdf.org/arg#> .
+@prefix concept:  <http://www.conceptwiki.org/concept/#> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix linked-data:  <http://purl.org/linked-data/api/vocab#> .
+@prefix msg0:    <http://www.openphacts.org/api#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sm:      <http://topbraid.org/sparqlmotion#> .
+@prefix sml:     <http://topbraid.org/sparqlmotionlib#> .
+@prefix sp:      <http://spinrdf.org/sp#> .
+@prefix spin:    <http://spinrdf.org/spin#> .
+@prefix unnamed:  <http://www.workingontologist.org/OpenPHACTS/scripts/tests/unnamed#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.workingontologist.org/OpenPHACTS/scripts/tests/unnamed>
+      rdf:type owl:Ontology ;
+      owl:imports <http://topbraid.org/sparqlmotionfunctions> , <http://topbraid.org/sparqlmotionlib-tbc> , <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS> ;
+      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
+
+unnamed:Function_1
+      rdf:type sm:Function ;
+      rdfs:subClassOf sm:Functions ;
+      sm:returnModule unnamed:Function_1_Return .
+
+unnamed:Function_1_Return
+      rdf:type sml:ReturnRDF .
+
+unnamed:freetext_1
+      rdf:type OP:freetext ;
+      rdfs:label "freetext 1"^^xsd:string ;
+      arg:common "Glyphosate"^^xsd:string ;
+      sm:nodeX 288 ;
+      sm:nodeY 17 ;
+      sm:outputVariable "result"^^xsd:string .
+
+unnamed:search-freetext_1
+      rdf:type OP:search-freetext ;
+      rdfs:label "search-freetext 1"^^xsd:string ;
+      arg:limit "15"^^xsd:string ;
+      arg:q   "Glyphosate"^^xsd:string ;
+      sm:next unnamed:Function_1_Return ;
+      sm:nodeX 256 ;
+      sm:nodeY 20 ;
+      sm:outputVariable "result"^^xsd:string .
