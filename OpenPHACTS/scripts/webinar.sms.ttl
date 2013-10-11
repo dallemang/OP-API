@@ -39,7 +39,7 @@
 
 <http://www.workingontologist.org/OpenPHACTS/scripts/webinar>
       rdf:type owl:Ontology ;
-      owl:imports <http://topbraid.org/sparqlmotionfunctions> , <http://topbraid.org/sparqlmotionlib-tbc> , <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS> , <http://topbraid.org/spin/spinmapl> , <http://rdfs.org/ns/void> ;
+      owl:imports <http://rdfs.org/ns/void> , <http://topbraid.org/spin/spinmapl> , <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS> , <http://topbraid.org/sparqlmotionlib-tbc> , <http://topbraid.org/sparqlmotionfunctions> ;
       owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
 
 webinar:BindBySelect_1
@@ -53,11 +53,34 @@ webinar:BindBySelect_1
                 sp:where ([ rdf:type sp:Bind ;
                             sp:expression
                                     [ rdf:type smf:trace ;
-                                      sp:arg1 [ sp:varName "uri"^^xsd:string
+                                      sp:arg1 [ rdf:type xsd:string ;
+                                                sp:arg1 [ sp:varName "uri"^^xsd:string
+                                                        ]
                                               ]
                                     ] ;
                             sp:variable
                                     [ sp:varName "trace"^^xsd:string
+                                    ]
+                          ])
+              ] .
+
+webinar:BindBySelect_2
+      rdf:type sml:BindBySelect ;
+      rdfs:label "Bind by select 2"^^xsd:string ;
+      sm:nodeX 324 ;
+      sm:nodeY 351 ;
+      sml:selectQuery
+              [ rdf:type sp:Select ;
+                sp:where ([ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:trace ;
+                                      sp:arg1 [ rdf:type xsd:string ;
+                                                sp:arg1 [ sp:varName "error"^^xsd:string
+                                                        ]
+                                              ]
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "e"^^xsd:string
                                     ]
                           ])
               ] .
@@ -74,6 +97,7 @@ webinar:CatchExceptions_2
       rdf:type sml:CatchExceptions ;
       rdfs:label "Catch exceptions 2"^^xsd:string ;
       sm:body webinar:BindBySelect_1 ;
+      sm:next webinar:BindBySelect_2 ;
       sm:nodeX 318 ;
       sm:nodeY 273 ;
       sm:outputVariable "error"^^xsd:string .
@@ -179,7 +203,7 @@ webinar:HelloWorld
       rdfs:subClassOf sm:Functions ;
       spin:constraint
               [ rdf:type spl:Argument ;
-                spl:predicate sp:arg1 ;
+                spl:predicate webinar:compound ;
                 spl:valueType xsd:string ;
                 sm:next webinar:SearchByName ;
                 sm:nodeX 496 ;
@@ -192,7 +216,7 @@ webinar:HelloWorld_Return
       sm:nodeX 473 ;
       sm:nodeY 403 ;
       sml:mimeType "text/html"^^xsd:string ;
-      sml:text "<html><head/><body><h2>Targets for {?arg1}</h2><table border=1><tr><th>Target</th><th>Organism</th><th>Description</th></tr>{?text}</table></body></html>"^^xsd:string .
+      sml:text "<html><head/><body><h2>Targets for {?compound}</h2><table border=1><tr><th>Target</th><th>Organism</th><th>Description</th></tr>{?text}</table></body></html>"^^xsd:string .
 
 webinar:IterateOverSelect_1
       rdf:type sml:IterateOverSelect ;
@@ -207,20 +231,11 @@ webinar:IterateOverSelect_1
                 sp:resultVariables ([ sp:varName "uri"^^xsd:string
                           ]) ;
                 sp:where ([ sp:object
-                                    [ sp:varName "u"^^xsd:string
+                                    [ sp:varName "uri"^^xsd:string
                                     ] ;
                             sp:predicate ops_api:result ;
                             sp:subject
                                     [ sp:varName "primaryTopic"^^xsd:string
-                                    ]
-                          ] [ rdf:type sp:Bind ;
-                            sp:expression
-                                    [ rdf:type xsd:string ;
-                                      sp:arg1 [ sp:varName "u"^^xsd:string
-                                              ]
-                                    ] ;
-                            sp:variable
-                                    [ sp:varName "uri"^^xsd:string
                                     ]
                           ])
               ] .
@@ -234,6 +249,7 @@ webinar:IterateOverSelect_2
       sm:nodeY 255 ;
       sml:selectQuery
               [ rdf:type sp:Select ;
+                sp:limit "2"^^xsd:long ;
                 sp:resultVariables ([ sp:varName "uri"^^xsd:string
                           ]) ;
                 sp:where ([ sp:object
@@ -249,26 +265,22 @@ webinar:IterateOverSelect_2
 webinar:SearchByName
       rdf:type OpenPHACTS:search-freetext ;
       rdfs:label "Search by name"^^xsd:string ;
-      arg:q   "{?arg1}"^^xsd:string ;
+      arg:q   "{?compound}"^^xsd:string ;
       sm:next webinar:IterateOverSelect_1 ;
       sm:nodeX 96 ;
       sm:nodeY 6 ;
       sm:outputVariable "result"^^xsd:string .
+
+webinar:compound
+      rdf:type rdf:Property ;
+      rdfs:label "compound"^^xsd:string ;
+      rdfs:range xsd:string .
 
 webinar:compound-pharmacology-pages_1
       rdf:type OpenPHACTS:compound-pharmacology-pages ;
       rdfs:label "compound-pharmacology-pages 1"^^xsd:string ;
       sm:nodeX 571 ;
       sm:nodeY 128 ;
-      sm:outputVariable "result"^^xsd:string .
-
-webinar:compound-pharmacology-pages_2
-      rdf:type OpenPHACTS:compound-pharmacology-pages ;
-      rdfs:label "compound-pharmacology-pages 2"^^xsd:string ;
-      arg:_pageSize "all"^^xsd:string ;
-      arg:uri "http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5"^^xsd:string ;
-      sm:nodeX 437 ;
-      sm:nodeY 79 ;
       sm:outputVariable "result"^^xsd:string .
 
 webinar:target_1
