@@ -1,0 +1,279 @@
+# baseURI: http://www.workingontologist.org/OpenPHACTS/scripts/webinar
+# imports: http://rdfs.org/ns/void
+# imports: http://topbraid.org/sparqlmotionfunctions
+# imports: http://topbraid.org/sparqlmotionlib-tbc
+# imports: http://topbraid.org/spin/spinmapl
+# imports: http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS
+
+@prefix OpenPHACTS:  <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS#> .
+@prefix arg:     <http://spinrdf.org/arg#> .
+@prefix bibo:    <http://purl.org/ontology/bibo/> .
+@prefix chembl:  <http://www.openphacts.org/chembl/onto/#> .
+@prefix cito:    <http://purl.org/spar/cito/> .
+@prefix concept:  <http://www.conceptwiki.org/concept/#> .
+@prefix cw:      <http://www.conceptwiki.org/concept/#> .
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix drugbank:  <http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugbank/> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix linked-data:  <http://purl.org/linked-data/api/vocab#> .
+@prefix m276734:  <http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734/> .
+@prefix msg0:    <http://www.openphacts.org/api#> .
+@prefix ns0:     <http://rdf.chemspider.com/#> .
+@prefix onto:    <http://rdf.farmbio.uu.se/chembl/onto/#> .
+@prefix opensearch:  <http://a9.com/-/spec/opensearch/1.1/> .
+@prefix ops_api:  <http://www.openphacts.org/api#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sm:      <http://topbraid.org/sparqlmotion#> .
+@prefix smf:     <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml:     <http://topbraid.org/sparqlmotionlib#> .
+@prefix sp:      <http://spinrdf.org/sp#> .
+@prefix spin:    <http://spinrdf.org/spin#> .
+@prefix spl:     <http://spinrdf.org/spl#> .
+@prefix uniprot:  <http://purl.uniprot.org/core/> .
+@prefix void:    <http://rdfs.org/ns/void#> .
+@prefix webinar:  <http://www.workingontologist.org/OpenPHACTS/scripts/webinar#> .
+@prefix xhtml:   <http://www.w3.org/1999/xhtml/vocab#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.workingontologist.org/OpenPHACTS/scripts/webinar>
+      rdf:type owl:Ontology ;
+      owl:imports <http://topbraid.org/sparqlmotionfunctions> , <http://topbraid.org/sparqlmotionlib-tbc> , <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS> , <http://topbraid.org/spin/spinmapl> , <http://rdfs.org/ns/void> ;
+      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
+
+webinar:BindBySelect_1
+      rdf:type sml:BindBySelect ;
+      rdfs:label "Bind by select 1"^^xsd:string ;
+      sm:next webinar:target_1 ;
+      sm:nodeX 522 ;
+      sm:nodeY 263 ;
+      sml:selectQuery
+              [ rdf:type sp:Select ;
+                sp:where ([ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:trace ;
+                                      sp:arg1 [ sp:varName "uri"^^xsd:string
+                                              ]
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "trace"^^xsd:string
+                                    ]
+                          ])
+              ] .
+
+webinar:CatchExceptions_1
+      rdf:type sml:CatchExceptions ;
+      rdfs:label "Catch exceptions 1"^^xsd:string ;
+      sm:body webinar:compound-pharmacology-pages_1 ;
+      sm:nodeX 342 ;
+      sm:nodeY 147 ;
+      sm:outputVariable "error"^^xsd:string .
+
+webinar:CatchExceptions_2
+      rdf:type sml:CatchExceptions ;
+      rdfs:label "Catch exceptions 2"^^xsd:string ;
+      sm:body webinar:BindBySelect_1 ;
+      sm:nodeX 318 ;
+      sm:nodeY 273 ;
+      sm:outputVariable "error"^^xsd:string .
+
+webinar:ConcatenateText_1
+      rdf:type sml:ConcatenateText ;
+      rdfs:label "Concatenate text 1"^^xsd:string ;
+      sm:next webinar:HelloWorld_Return ;
+      sm:nodeX 108 ;
+      sm:nodeY 403 ;
+      sm:outputVariable "text" ;
+      sml:selectQuery
+              [ rdf:type sp:Select ;
+                sp:distinct "true"^^xsd:boolean ;
+                sp:resultVariables ([ sp:varName "text"^^xsd:string
+                          ]) ;
+                sp:where ([ sp:object
+                                    [ sp:varName "cw_uri"^^xsd:string
+                                    ] ;
+                            sp:predicate <http://www.w3.org/2004/02/skos/core#exactMatch> ;
+                            sp:subject
+                                    [ sp:varName "ops_item"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "uniprot_uri"^^xsd:string
+                                    ] ;
+                            sp:predicate <http://www.w3.org/2004/02/skos/core#exactMatch> ;
+                            sp:subject
+                                    [ sp:varName "ops_item"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "equiv_target"^^xsd:string
+                                    ] ;
+                            sp:predicate <http://www.w3.org/2004/02/skos/core#exactMatch> ;
+                            sp:subject
+                                    [ sp:varName "ops_item"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "db_uri"^^xsd:string
+                                    ] ;
+                            sp:predicate <http://www.w3.org/2004/02/skos/core#exactMatch> ;
+                            sp:subject
+                                    [ sp:varName "ops_item"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "target_name"^^xsd:string
+                                    ] ;
+                            sp:predicate <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                            sp:subject
+                                    [ sp:varName "cw_uri"^^xsd:string
+                                    ]
+                          ] [ sp:object <http://www.conceptwiki.org> ;
+                            sp:predicate void:inDataset ;
+                            sp:subject
+                                    [ sp:varName "cw_uri"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "existence"^^xsd:string
+                                    ] ;
+                            sp:predicate uniprot:existence ;
+                            sp:subject
+                                    [ sp:varName "uniprot_uri"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "organism"^^xsd:string
+                                    ] ;
+                            sp:predicate uniprot:organism ;
+                            sp:subject
+                                    [ sp:varName "uniprot_uri"^^xsd:string
+                                    ]
+                          ] [ sp:object <http://purl.uniprot.org> ;
+                            sp:predicate void:inDataset ;
+                            sp:subject
+                                    [ sp:varName "uniprot_uri"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "description"^^xsd:string
+                                    ] ;
+                            sp:predicate onto:hasDescription ;
+                            sp:subject
+                                    [ sp:varName "equiv_target"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildString ;
+                                      sp:arg1 "<tr><td>{?target_name}</td><td>{?1}</td><td>{?description}</td></tr>" ;
+                                      sp:arg2 [ rdf:type smf:htmlString ;
+                                                sp:arg1 [ rdf:type xsd:string ;
+                                                          sp:arg1 [ sp:varName "organism"^^xsd:string
+                                                                  ]
+                                                        ]
+                                              ]
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "text"^^xsd:string
+                                    ]
+                          ])
+              ] .
+
+webinar:HelloWorld
+      rdf:type sm:Function ;
+      rdfs:comment "Hello World application based on webinar from Paul Groth"^^xsd:string ;
+      rdfs:subClassOf sm:Functions ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                spl:predicate sp:arg1 ;
+                spl:valueType xsd:string ;
+                sm:next webinar:SearchByName ;
+                sm:nodeX 496 ;
+                sm:nodeY 15
+              ] ;
+      sm:returnModule webinar:HelloWorld_Return .
+
+webinar:HelloWorld_Return
+      rdf:type sml:ReturnText ;
+      sm:nodeX 473 ;
+      sm:nodeY 403 ;
+      sml:mimeType "text/html"^^xsd:string ;
+      sml:text "<html><head/><body><h2>Targets for {?arg1}</h2><table border=1><tr><th>Target</th><th>Organism</th><th>Description</th></tr>{?text}</table></body></html>"^^xsd:string .
+
+webinar:IterateOverSelect_1
+      rdf:type sml:IterateOverSelect ;
+      rdfs:label "Iterate over select 1"^^xsd:string ;
+      sm:body webinar:CatchExceptions_1 ;
+      sm:next webinar:IterateOverSelect_2 ;
+      sm:nodeX 105 ;
+      sm:nodeY 137 ;
+      sml:selectQuery
+              [ rdf:type sp:Select ;
+                sp:distinct "true"^^xsd:boolean ;
+                sp:resultVariables ([ sp:varName "uri"^^xsd:string
+                          ]) ;
+                sp:where ([ sp:object
+                                    [ sp:varName "u"^^xsd:string
+                                    ] ;
+                            sp:predicate ops_api:result ;
+                            sp:subject
+                                    [ sp:varName "primaryTopic"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type xsd:string ;
+                                      sp:arg1 [ sp:varName "u"^^xsd:string
+                                              ]
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "uri"^^xsd:string
+                                    ]
+                          ])
+              ] .
+
+webinar:IterateOverSelect_2
+      rdf:type sml:IterateOverSelect ;
+      rdfs:label "Iterate over select 2"^^xsd:string ;
+      sm:body webinar:CatchExceptions_2 ;
+      sm:next webinar:ConcatenateText_1 ;
+      sm:nodeX 103 ;
+      sm:nodeY 255 ;
+      sml:selectQuery
+              [ rdf:type sp:Select ;
+                sp:resultVariables ([ sp:varName "uri"^^xsd:string
+                          ]) ;
+                sp:where ([ sp:object
+                                    [ sp:varName "uri"^^xsd:string
+                                    ] ;
+                            sp:predicate onto:hasTarget ;
+                            sp:subject
+                                    [ sp:varName "s"^^xsd:string
+                                    ]
+                          ])
+              ] .
+
+webinar:SearchByName
+      rdf:type OpenPHACTS:search-freetext ;
+      rdfs:label "Search by name"^^xsd:string ;
+      arg:q   "{?arg1}"^^xsd:string ;
+      sm:next webinar:IterateOverSelect_1 ;
+      sm:nodeX 96 ;
+      sm:nodeY 6 ;
+      sm:outputVariable "result"^^xsd:string .
+
+webinar:compound-pharmacology-pages_1
+      rdf:type OpenPHACTS:compound-pharmacology-pages ;
+      rdfs:label "compound-pharmacology-pages 1"^^xsd:string ;
+      sm:nodeX 571 ;
+      sm:nodeY 128 ;
+      sm:outputVariable "result"^^xsd:string .
+
+webinar:compound-pharmacology-pages_2
+      rdf:type OpenPHACTS:compound-pharmacology-pages ;
+      rdfs:label "compound-pharmacology-pages 2"^^xsd:string ;
+      arg:_pageSize "all"^^xsd:string ;
+      arg:uri "http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5"^^xsd:string ;
+      sm:nodeX 437 ;
+      sm:nodeY 79 ;
+      sm:outputVariable "result"^^xsd:string .
+
+webinar:target_1
+      rdf:type OpenPHACTS:target ;
+      rdfs:label "target 1"^^xsd:string ;
+      sm:nodeX 699 ;
+      sm:nodeY 253 ;
+      sm:outputVariable "result"^^xsd:string .
