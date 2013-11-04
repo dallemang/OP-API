@@ -18,13 +18,39 @@
 
 <http://www.workingontologist.org/OpenPHACTS/scripts/buildOP>
       rdf:type owl:Ontology ;
-      owl:imports <http://topbraid.org/sparqlmotionlib-tbc> , <http://topbraid.org/sparqlmotionfunctions> ;
+      owl:imports <http://topbraid.org/sparqlmotionfunctions> , <http://topbraid.org/sparqlmotionlib-tbc> ;
       owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
 
 buildOP:ApplyConstruct_1
       rdf:type sml:ApplyConstruct ;
       rdfs:label "Apply construct 1"^^xsd:string ;
       sm:next buildOP:FilterByConstruct_1 ;
+      sml:constructQuery
+              [ rdf:type sp:Construct ;
+                sp:templates ([ sp:object owl:Ontology ;
+                            sp:predicate rdf:type ;
+                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
+                          ] [ sp:object <http://topbraid.org/sparqlmotionfunctions> ;
+                            sp:predicate owl:imports ;
+                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
+                          ] [ sp:object <http://topbraid.org/sparqlmotionlib-tbc> ;
+                            sp:predicate owl:imports ;
+                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
+                          ] [ sp:object <http://www.w3.org/2004/02/skos/core> ;
+                            sp:predicate owl:imports ;
+                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
+                          ] [ sp:object <http://www.workingontologist.org/OpenPHACTS/keys/keymodel> ;
+                            sp:predicate owl:imports ;
+                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
+                          ] [ sp:object "Created with TopBraid Composer"^^xsd:string ;
+                            sp:predicate owl:versionInfo ;
+                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
+                          ] [ sp:object <http://www.workingontologist.org/OpenPHACTS/scripts/namespaces> ;
+                            sp:predicate owl:imports ;
+                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
+                          ]) ;
+                sp:where ()
+              ] ;
       sml:constructQuery
               [ rdf:type sp:Construct ;
                 rdfs:comment "This query builds the function from elements of MyClass that describe the API.  The only flaw is that the SelectByQuery has too many copies of the query.  there's another query to remove the ones that aren't needed.  It leaves a bunch of junk lying around that nobody sees, but takes up space.  So be it."^^xsd:string ;
@@ -111,13 +137,6 @@ buildOP:ApplyConstruct_1
                             sp:predicate rdf:type ;
                             sp:subject
                                     [ sp:varName "importrdffromworkspace"^^xsd:string
-                                    ]
-                          ] [ sp:object
-                                    [ sp:varName "returnrdf"^^xsd:string
-                                    ] ;
-                            sp:predicate sm:next ;
-                            sp:subject
-                                    [ sp:varName "importrdffromurl"^^xsd:string
                                     ]
                           ] [ sp:object
                                     [ sp:varName "call"^^xsd:string
@@ -242,7 +261,7 @@ buildOP:ApplyConstruct_1
                             sp:predicate rdf:first ;
                             sp:subject _:b11
                           ] [ sp:object
-                                    [ sp:varName "importrdffromurl"^^xsd:string
+                                    [ sp:varName "catch"^^xsd:string
                                     ] ;
                             sp:predicate sm:next ;
                             sp:subject
@@ -264,8 +283,32 @@ buildOP:ApplyConstruct_1
                           ] [ sp:object _:b23 ;
                             sp:predicate rdf:first ;
                             sp:subject _:b26
+                          ] [ sp:object sml:CatchExceptions ;
+                            sp:predicate rdf:type ;
+                            sp:subject
+                                    [ sp:varName "catch"^^xsd:string
+                                    ]
                           ] [ sp:object
                                     [ sp:varName "importrdffromurl"^^xsd:string
+                                    ] ;
+                            sp:predicate sm:body ;
+                            sp:subject
+                                    [ sp:varName "catch"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "returnrdf"^^xsd:string
+                                    ] ;
+                            sp:predicate sm:next ;
+                            sp:subject
+                                    [ sp:varName "catch"^^xsd:string
+                                    ]
+                          ] [ sp:object "error" ;
+                            sp:predicate sm:outputVariable ;
+                            sp:subject
+                                    [ sp:varName "catch"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "catch"^^xsd:string
                                     ] ;
                             sp:predicate sm:next ;
                             sp:subject
@@ -437,6 +480,14 @@ buildOP:ApplyConstruct_1
                           ] [ rdf:type sp:Bind ;
                             sp:expression
                                     [ rdf:type smf:buildURI ;
+                                      sp:arg1 ":Catch-{?fname}"
+                                    ] ;
+                            sp:variable
+                                    [ sp:varName "catch"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:Bind ;
+                            sp:expression
+                                    [ rdf:type smf:buildURI ;
                                       sp:arg1 ":Bind-{?fname}"
                                     ] ;
                             sp:variable
@@ -459,29 +510,6 @@ buildOP:ApplyConstruct_1
                                     [ sp:varName "importrdffromworkspace"^^xsd:string
                                     ]
                           ])
-              ] ;
-      sml:constructQuery
-              [ rdf:type sp:Construct ;
-                sp:templates ([ sp:object owl:Ontology ;
-                            sp:predicate rdf:type ;
-                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
-                          ] [ sp:object <http://topbraid.org/sparqlmotionfunctions> ;
-                            sp:predicate owl:imports ;
-                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
-                          ] [ sp:object <http://topbraid.org/sparqlmotionlib-tbc> ;
-                            sp:predicate owl:imports ;
-                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
-                          ] [ sp:object <http://www.w3.org/2004/02/skos/core> ;
-                            sp:predicate owl:imports ;
-                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
-                          ] [ sp:object <http://www.workingontologist.org/OpenPHACTS/keys/keymodel> ;
-                            sp:predicate owl:imports ;
-                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
-                          ] [ sp:object "Created with TopBraid Composer"^^xsd:string ;
-                            sp:predicate owl:versionInfo ;
-                            sp:subject <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS>
-                          ]) ;
-                sp:where ()
               ] ;
       sml:replace "true"^^xsd:boolean .
 
@@ -541,11 +569,18 @@ buildOP:ApplyConstruct_2
                                                           [ sp:varName "importrdffromurl"^^xsd:string
                                                           ]
                                                 ] [ sp:object
-                                                          [ sp:varName "importrdffromurl"^^xsd:string
+                                                          [ sp:varName "catch"^^xsd:string
                                                           ] ;
                                                   sp:predicate sm:next ;
                                                   sp:subject
                                                           [ sp:varName "bindbyselect"^^xsd:string
+                                                          ]
+                                                ] [ sp:object
+                                                          [ sp:varName "importrdffromurl"^^xsd:string
+                                                          ] ;
+                                                  sp:predicate sm:body ;
+                                                  sp:subject
+                                                          [ sp:varName "catch"^^xsd:string
                                                           ]
                                                 ] [ sp:object sml:BindBySelect ;
                                                   sp:predicate rdf:type ;

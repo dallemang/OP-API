@@ -42,66 +42,6 @@
       owl:imports <http://rdfs.org/ns/void> , <http://topbraid.org/spin/spinmapl> , <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS> , <http://topbraid.org/sparqlmotionlib-tbc> , <http://topbraid.org/sparqlmotionfunctions> ;
       owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
 
-webinar:BindBySelect_1
-      rdf:type sml:BindBySelect ;
-      rdfs:label "Bind by select 1"^^xsd:string ;
-      sm:next webinar:target_1 ;
-      sm:nodeX 522 ;
-      sm:nodeY 263 ;
-      sml:selectQuery
-              [ rdf:type sp:Select ;
-                sp:where ([ rdf:type sp:Bind ;
-                            sp:expression
-                                    [ rdf:type smf:trace ;
-                                      sp:arg1 [ rdf:type xsd:string ;
-                                                sp:arg1 [ sp:varName "uri"^^xsd:string
-                                                        ]
-                                              ]
-                                    ] ;
-                            sp:variable
-                                    [ sp:varName "trace"^^xsd:string
-                                    ]
-                          ])
-              ] .
-
-webinar:BindBySelect_2
-      rdf:type sml:BindBySelect ;
-      rdfs:label "Bind by select 2"^^xsd:string ;
-      sm:nodeX 324 ;
-      sm:nodeY 351 ;
-      sml:selectQuery
-              [ rdf:type sp:Select ;
-                sp:where ([ rdf:type sp:Bind ;
-                            sp:expression
-                                    [ rdf:type smf:trace ;
-                                      sp:arg1 [ rdf:type xsd:string ;
-                                                sp:arg1 [ sp:varName "error"^^xsd:string
-                                                        ]
-                                              ]
-                                    ] ;
-                            sp:variable
-                                    [ sp:varName "e"^^xsd:string
-                                    ]
-                          ])
-              ] .
-
-webinar:CatchExceptions_1
-      rdf:type sml:CatchExceptions ;
-      rdfs:label "Catch exceptions 1"^^xsd:string ;
-      sm:body webinar:compound-pharmacology-pages_1 ;
-      sm:nodeX 342 ;
-      sm:nodeY 147 ;
-      sm:outputVariable "error"^^xsd:string .
-
-webinar:CatchExceptions_2
-      rdf:type sml:CatchExceptions ;
-      rdfs:label "Catch exceptions 2"^^xsd:string ;
-      sm:body webinar:BindBySelect_1 ;
-      sm:next webinar:BindBySelect_2 ;
-      sm:nodeX 318 ;
-      sm:nodeY 273 ;
-      sm:outputVariable "error"^^xsd:string .
-
 webinar:ConcatenateText_1
       rdf:type sml:ConcatenateText ;
       rdfs:label "Concatenate text 1"^^xsd:string ;
@@ -206,22 +146,22 @@ webinar:HelloWorld
                 spl:predicate webinar:compound ;
                 spl:valueType xsd:string ;
                 sm:next webinar:SearchByName ;
-                sm:nodeX 496 ;
-                sm:nodeY 15
+                sm:nodeX 409 ;
+                sm:nodeY 14
               ] ;
       sm:returnModule webinar:HelloWorld_Return .
 
 webinar:HelloWorld_Return
       rdf:type sml:ReturnText ;
-      sm:nodeX 473 ;
-      sm:nodeY 403 ;
+      sm:nodeX 424 ;
+      sm:nodeY 404 ;
       sml:mimeType "text/html"^^xsd:string ;
       sml:text "<html><head/><body><h2>Targets for {?compound}</h2><table border=1><tr><th>Target</th><th>Organism</th><th>Description</th></tr>{?text}</table></body></html>"^^xsd:string .
 
 webinar:IterateOverSelect_1
       rdf:type sml:IterateOverSelect ;
       rdfs:label "Iterate over select 1"^^xsd:string ;
-      sm:body webinar:CatchExceptions_1 ;
+      sm:body webinar:compound-pharmacology-pages_1 ;
       sm:next webinar:IterateOverSelect_2 ;
       sm:nodeX 105 ;
       sm:nodeY 137 ;
@@ -243,7 +183,7 @@ webinar:IterateOverSelect_1
 webinar:IterateOverSelect_2
       rdf:type sml:IterateOverSelect ;
       rdfs:label "Iterate over select 2"^^xsd:string ;
-      sm:body webinar:CatchExceptions_2 ;
+      sm:body webinar:target_1 ;
       sm:next webinar:ConcatenateText_1 ;
       sm:nodeX 103 ;
       sm:nodeY 255 ;
@@ -279,13 +219,13 @@ webinar:compound
 webinar:compound-pharmacology-pages_1
       rdf:type OpenPHACTS:compound-pharmacology-pages ;
       rdfs:label "compound-pharmacology-pages 1"^^xsd:string ;
-      sm:nodeX 571 ;
-      sm:nodeY 128 ;
+      sm:nodeX 421 ;
+      sm:nodeY 127 ;
       sm:outputVariable "result"^^xsd:string .
 
 webinar:target_1
       rdf:type OpenPHACTS:target ;
       rdfs:label "target 1"^^xsd:string ;
-      sm:nodeX 699 ;
-      sm:nodeY 253 ;
+      sm:nodeX 460 ;
+      sm:nodeY 256 ;
       sm:outputVariable "result"^^xsd:string .
