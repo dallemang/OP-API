@@ -1,0 +1,34 @@
+<h2>Installing the OpenPHACTS API modules in TopBraid Composer</h2>
+
+<h3>Install TopBraid Composer Maestro Edition.</h3>
+  You can get a trial version <a href="http://topquadrant.com/products/TB_download.html">here</a>. Make sure you have the Maestro edition, so that you can use SPARQLMotion.
+
+<h3>Download the modules from GIT</h3>
+
+The OpenPHACTS modules are available on <a href="https://github.com/dallemang/OP-API">GitHub</a>.  Download the zip file and extract it somewhere on your local disk. 
+
+<h3>Create a project in TopBraid Composer</h3>
+Right-click in the Navigator and select New>Project>General>Project.  Call your projecct "OpenPHACTS".  Instead of using the default location for a new project (unclick that box), navigate to the directory where you unzipped the module files.  Navigate to the folder called "OpenPHACTS" (see image)
+<p/>
+<img src="images/project.jpg">
+
+<h3>Install your API keys</h3>
+
+You will need an application ID and key to operate the OpenPHACTS API.  You can get your keys from the <a href="http://dev.openphacts.org">OpenPHACTS Developer Site</a>.  Click on "Get my API keys!" and follow the instructions. 
+
+You can install your API keys in your SPARQLMotion installation by editing the file keys/PHACTS.key.ttl.  The relevant part of the file to edit is at the end:
+
+<pre>
+PHACTS:MyKey
+      rdf:type keymodel:Key ;
+      rdfs:label "My key"^^xsd:string ;
+      keymodel:id "XXXXXXXX"^^xsd:string ;
+      keymodel:key "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"^^xsd:string .
+</pre>
+
+Replace XXXXXXXX with your appliction ID and xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx with your key.  In TopBraid Composer, refresh your project by right-clicing and selecting "Refresh".
+<p/>
+Your OpenPHACTS modules are now ready to use. 
+
+<p/>
+Next: <a href="OPHello.html">Hello World - your first OpenPHACTS SPARQLMotion script</a>

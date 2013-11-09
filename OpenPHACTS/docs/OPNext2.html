@@ -1,0 +1,18 @@
+<h2>Running the script </h2>
+
+We can run the script just as we did before, by selecting a module and clicking the "Run" arrow.  Select the  <i>Iterate over select 1</i> module, and click "Run" as shown in the screen shot: 
+<p/>
+<img src="images/Next4.jpg">
+<p/>
+Type in "Sorafenib" when prompted, then "Infer result triples" and click, "Close".  As before, you can copy-and-paste from the OpenPHACTS documentation right into a SPARQL Query, e.g.:
+<pre>
+SELECT *
+WHERE {
+?equiv_assay chembl:hasTarget ?equiv_target ;
+}
+</pre>
+and see the targets associated with the assays in the results.  
+<p/>
+
+
+Next: <a href="OPFinish.html">Running your script as a web service</a>

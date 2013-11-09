@@ -1,0 +1,13 @@
+<h2>Using the OpenPHACTS API with SPARQLMotion</h2>
+
+<h3>Introduction - SPARQLMotion and OpenPHACTS</h3>
+<a href="http://sparqlmotion.org">SPARQLMotion</a> is a visual dataflow scripting language based on RDF and SPARQL. A SPARQLMotion script is made up of processing modules that create, merge or transform RDF data sets.  Documentation on SPARQLMotion is available at <a href="http://sparqlmotion.org">http://sparqlmotion.org</a>.  
+<p/>
+
+<a href="http://www.openphacts.org/"OpenPHACTS</a>The Open PHACTS Discovery Platform</a> provides access to a large set of integrated pharmacological data through a single API.  The <a href="https://dev.openphacts.org/docs">Dynamic documentation of the OpenPHACTS API</a> demonstrate the use of the API with convenient web forms. 
+<p/>
+Since the API is provide as a set of RESTful web services, and since SPARQLMotion allows calls to such services, it is possible to use the OpenPHACTS API directly in SPARQL Motion scripts.  But this requires that the scriptwriter pay close attention to the particular services in the API, and prepare values for all the arguments for each service, etc. 
+<p/>
+<a href="http://workingontologist.com">Working Ontologist, LLC.</a> has prepared a set of stubs for using the OpenPHACTS API in SPARQL Motion.  The package defines one SPARQLMotion module for each API service.  The module definition declare the appropriate parameters for each service, and performs appropriate encodings for sending information to and from the services.  The OpenPHACTS modules appear in the SPARQLMotion pallet, and can be instantiated just like any other module by drag-and-dropping them onto the SPARQLMotion canvas. 
+<p/>
+Next: <a href="OPInstall.html">Installing the OpenPHACTS API modules in TopBraid Composer</a>

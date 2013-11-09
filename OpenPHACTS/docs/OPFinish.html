@@ -1,0 +1,18 @@
+<h2>Running your script as a web service</h2>
+
+You can carry on in this way, running an OpenPHACTS service and querying the results, pasting the query into a new module, calling new services, etc. 
+<p/>
+Eventually, you'll want to do something with your results, e.g., display them in a web browser.  To do this, you'll need to create a web page from your results, and return them as a result to a HTTP request. You can see an example of the finished product by opening the file webinar.sms.ttl, pulling down the Scripts>Edit/View SPARQLMotion Script, and select the one at the bottom of the list, <i>webinar:Hello_World</i>.  You'll see a script that looks something like this:
+<p/>
+<img src="images/webinar1.jpg">
+<p/>
+This script starts off just like yours did, by calling <i>search-freetext</i>, iterating over the results, calling <i>compound-pharmacology-pages</i> on each result, then continues by calling <i>target</i> on each target.  Finally (<i>Concatenate text 1</i>), it concatenates all the answers into an HTML table for use by a web browser. <p/>
+If you run this script (click on the final module, the red one, <i>webinar:HelloWorld_Return</i>), you'll see it in action.  It takes a while to do all those OpenPHACTS calls, but when it's done, you'll see the results previewed in a TopBraid Composer pane. 
+<p/>
+<img src="images/webinar2.jpg">
+<p/>
+You can also run this as a web service.  The .sms.ttl suffix on the file registers its functions as web services with TopBraid.  If you have default settings for your TopBraid Composer, you can run your web service from any web browser with the following link (TopBraid must already be running)
+<p/>
+<a href="http://localhost:8083/tbl/sparqlmotion?id=HelloWorld&compound=Sorafenib" target=_blank>http://localhost:8083/tbl/sparqlmotion?id=HelloWorld&compound=Sorafenib</a>
+<p/>
+<p/>Next: <a href="OPSummary.html">Summary</a>

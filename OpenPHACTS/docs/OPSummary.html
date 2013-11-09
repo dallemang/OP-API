@@ -1,0 +1,23 @@
+<h2>Summary</h2>
+
+This tutorial shows how to use the OpenPHACTS API in the context of the TopBraid SPARQLMotion scripting language.  This allows you to visually combine OpenPHACTS calls with one another, merge the outputs of OpenPHACTS services, query against OpenPHACTS outputs, and create your own web services. 
+
+If you are not familiar with SPARQLMotion, this tutorial has given you a taste: it is a dataflow language based natively on SPARQL, using the facility in RDF for data filtering and combination as the basis for data management.  SPARQLMotion is a rich semantic web language.  You can learn more about it a <a href="http://sparqlmotion.org/">sparqlmotion.org</a>.
+
+<h2>Extras</h2>
+<h3>SPARQLMotion Implementations</h3>
+
+As far as I know, the only full implementation of SPARQLMotion is available from TopQuadrant as part of the TopBraid platform.  You can run your own SPARLQMotion scripts inside of <a href="http://topquadrant.com/products/TB_download.html">TopBraid Composer</a>.  TopBraid Composer isn't cheap, but it is worth every penny.  I highly recommend it for anyone who is serious about managing models and data sets in the Semantic Web.  If you do purchase any TopBraid product because of this API connection, please inform TopQuadrant that you made your purchase based on a recommendation you got from Working Ontologist LLC. 
+
+<h3>Running SPARQL queries against the OpenPHACTS dataset</h3>
+
+OpenPHACTS includes a carefully curated, linked set of open data sets, all represented in RDF.  If you are a Semantic Web developer, or even just an enthusiast, it is natural that you would wnat to run SPARQL queries against this dataset, so that you can do your own exploration.  Unfortunately, this isn't very practical for a large-scale, shared server platform.  It isn't standard practice for other database technology, either; relational databases don't provide their general users with unfettered access to SQL on their servers. 
+<p/>
+Nevertheless, one of the great powers of a Semantic Web data store is the ability to explore it using SPARQL.  SPARQLMotion provides a sort of half-way solution to this problem. 
+<p/>
+From the OpenPHACTS point of view, they have to control which queries are executed against the database.  They do this by providing a set of approved queries in the form of an API.  The results of these queries are available in RDF, which means that you can collect those triples, merge them, and run SPARQL queries over the reduced set of triples that the API calls delivered to you. 
+<p/>
+You can, of course, do this in a general-purpose programming language like Java or Python, but SPARQLMotion provides a framework specifically suited to working in RDF and SPARQL.  In short, you can make your controlled calls to OpenPHACTS using the API (thereby keeping access to the back-end under control), while having the freedom to write your own SPARQL queries.  You can't write longitudinal queries (queries that work over the whole data store at once), but you can explore; start with a single compound, work out to its targets, etc.  This tutorial has shown a simple example of how that can work. 
+
+<a href="OpenPHACTS.html">Start Over</a>
+
