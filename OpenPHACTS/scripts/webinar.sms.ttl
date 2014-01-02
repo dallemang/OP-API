@@ -6,20 +6,22 @@
 # imports: http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS
 
 @prefix OpenPHACTS:  <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS#> .
+@prefix PHACTS:  <http://www.workingontologist.org/OpenPHACTS/keys/PHACTS.key#> .
 @prefix arg:     <http://spinrdf.org/arg#> .
 @prefix bibo:    <http://purl.org/ontology/bibo/> .
-@prefix chembl:  <http://www.openphacts.org/chembl/onto/#> .
+@prefix chembl:  <http://rdf.ebi.ac.uk/terms/chembl#> .
 @prefix cito:    <http://purl.org/spar/cito/> .
 @prefix concept:  <http://www.conceptwiki.org/concept/#> .
 @prefix cw:      <http://www.conceptwiki.org/concept/#> .
 @prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms:  <http://purl.org/dc/terms/> .
 @prefix drugbank:  <http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugbank/> .
 @prefix foaf:    <http://xmlns.com/foaf/0.1/> .
 @prefix linked-data:  <http://purl.org/linked-data/api/vocab#> .
 @prefix m276734:  <http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734/> .
 @prefix msg0:    <http://www.openphacts.org/api#> .
 @prefix ns0:     <http://rdf.chemspider.com/#> .
-@prefix onto:    <http://rdf.farmbio.uu.se/chembl/onto/#> .
+@prefix onto:    <http://rdf.ebi.ac.uk/terms/chembl#> .
 @prefix opensearch:  <http://a9.com/-/spec/opensearch/1.1/> .
 @prefix ops_api:  <http://www.openphacts.org/api#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
@@ -39,7 +41,7 @@
 
 <http://www.workingontologist.org/OpenPHACTS/scripts/webinar>
       rdf:type owl:Ontology ;
-      owl:imports <http://rdfs.org/ns/void> , <http://topbraid.org/spin/spinmapl> , <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS> , <http://topbraid.org/sparqlmotionlib-tbc> , <http://topbraid.org/sparqlmotionfunctions> ;
+      owl:imports <http://topbraid.org/sparqlmotionfunctions> , <http://topbraid.org/sparqlmotionlib-tbc> , <http://www.workingontologist.org/OpenPHACTS/scripts/OpenPHACTS> , <http://topbraid.org/spin/spinmapl> , <http://rdfs.org/ns/void> ;
       owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
 
 webinar:ConcatenateText_1
@@ -55,70 +57,32 @@ webinar:ConcatenateText_1
                 sp:resultVariables ([ sp:varName "text"^^xsd:string
                           ]) ;
                 sp:where ([ sp:object
-                                    [ sp:varName "cw_uri"^^xsd:string
+                                    [ sp:varName "target_uri"^^xsd:string
                                     ] ;
-                            sp:predicate <http://www.w3.org/2004/02/skos/core#exactMatch> ;
+                            sp:predicate onto:hasTarget ;
                             sp:subject
-                                    [ sp:varName "ops_item"^^xsd:string
-                                    ]
-                          ] [ sp:object
-                                    [ sp:varName "uniprot_uri"^^xsd:string
-                                    ] ;
-                            sp:predicate <http://www.w3.org/2004/02/skos/core#exactMatch> ;
-                            sp:subject
-                                    [ sp:varName "ops_item"^^xsd:string
-                                    ]
-                          ] [ sp:object
-                                    [ sp:varName "equiv_target"^^xsd:string
-                                    ] ;
-                            sp:predicate <http://www.w3.org/2004/02/skos/core#exactMatch> ;
-                            sp:subject
-                                    [ sp:varName "ops_item"^^xsd:string
-                                    ]
-                          ] [ sp:object
-                                    [ sp:varName "db_uri"^^xsd:string
-                                    ] ;
-                            sp:predicate <http://www.w3.org/2004/02/skos/core#exactMatch> ;
-                            sp:subject
-                                    [ sp:varName "ops_item"^^xsd:string
-                                    ]
-                          ] [ sp:object
-                                    [ sp:varName "target_name"^^xsd:string
-                                    ] ;
-                            sp:predicate <http://www.w3.org/2004/02/skos/core#prefLabel> ;
-                            sp:subject
-                                    [ sp:varName "cw_uri"^^xsd:string
-                                    ]
-                          ] [ sp:object <http://www.conceptwiki.org> ;
-                            sp:predicate void:inDataset ;
-                            sp:subject
-                                    [ sp:varName "cw_uri"^^xsd:string
-                                    ]
-                          ] [ sp:object
-                                    [ sp:varName "existence"^^xsd:string
-                                    ] ;
-                            sp:predicate uniprot:existence ;
-                            sp:subject
-                                    [ sp:varName "uniprot_uri"^^xsd:string
-                                    ]
-                          ] [ sp:object
-                                    [ sp:varName "organism"^^xsd:string
-                                    ] ;
-                            sp:predicate uniprot:organism ;
-                            sp:subject
-                                    [ sp:varName "uniprot_uri"^^xsd:string
-                                    ]
-                          ] [ sp:object <http://purl.uniprot.org> ;
-                            sp:predicate void:inDataset ;
-                            sp:subject
-                                    [ sp:varName "uniprot_uri"^^xsd:string
+                                    [ sp:varName "assay_uri"^^xsd:string
                                     ]
                           ] [ sp:object
                                     [ sp:varName "description"^^xsd:string
                                     ] ;
-                            sp:predicate onto:hasDescription ;
+                            sp:predicate dcterms:description ;
                             sp:subject
-                                    [ sp:varName "equiv_target"^^xsd:string
+                                    [ sp:varName "assay_uri"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "target_name"^^xsd:string
+                                    ] ;
+                            sp:predicate dcterms:title ;
+                            sp:subject
+                                    [ sp:varName "target_uri"^^xsd:string
+                                    ]
+                          ] [ sp:object
+                                    [ sp:varName "target_organism"^^xsd:string
+                                    ] ;
+                            sp:predicate onto:targetOrganismName ;
+                            sp:subject
+                                    [ sp:varName "target_uri"^^xsd:string
                                     ]
                           ] [ rdf:type sp:Bind ;
                             sp:expression
@@ -126,7 +90,7 @@ webinar:ConcatenateText_1
                                       sp:arg1 "<tr><td>{?target_name}</td><td>{?1}</td><td>{?description}</td></tr>" ;
                                       sp:arg2 [ rdf:type smf:htmlString ;
                                                 sp:arg1 [ rdf:type xsd:string ;
-                                                          sp:arg1 [ sp:varName "organism"^^xsd:string
+                                                          sp:arg1 [ sp:varName "target_organism"^^xsd:string
                                                                   ]
                                                         ]
                                               ]
